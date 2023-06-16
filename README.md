@@ -1,4 +1,4 @@
-# Bushmeat Hunting Model
+# Bushmeat Hunting Model 
 
 [![CI](https://github.com/cormas/bushmeat-hunting-model/actions/workflows/test.yml/badge.svg)](https://github.com/cormas/bushmeat-hunting-model/actions/workflows/test.yml)
 [![Coverage Status](https://coveralls.io/repos/github/cormas/bushmeat-hunting-model/badge.svg?branch=main)](https://coveralls.io/github/cormas/bushmeat-hunting-model?branch=main)
