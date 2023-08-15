@@ -1,7 +1,7 @@
 Class {
 	#name : #BHAnthelope,
 	#superclass : #CMAgent,
-	#traits : 'TCMLocated',
+	#traits : 'TCMLocated @ {#basicMoveTo:->#moveTo:}',
 	#classTraits : 'TCMLocated classTrait',
 	#instVars : [
 		'age',
@@ -172,7 +172,7 @@ BHAnthelope >> move [
 { #category : #moving }
 BHAnthelope >> moveTo: nearestEmptyLoc [
 
-	super moveTo: nearestEmptyLoc.
+	self basicMoveTo: nearestEmptyLoc.
 	nearestEmptyLoc hasTrap ifFalse: [ ^ self ].
 	self cormasModel increaseCatchesNumber.
 	nearestEmptyLoc increaseTrapCatches.
