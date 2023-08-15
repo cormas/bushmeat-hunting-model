@@ -80,7 +80,6 @@ BHCell >> pov [
 { #category : #pov }
 BHCell >> povTraps [
 
-	self halt.
 	^ self
 		  povAttribute: #traps
 		  min: 0

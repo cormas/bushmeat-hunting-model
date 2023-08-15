@@ -1,6 +1,8 @@
 Class {
 	#name : #BHHuntingFamily,
 	#superclass : #CMGroup,
+	#traits : 'TCMLocated',
+	#classTraits : 'TCMLocated classTrait',
 	#instVars : [
 		'traps',
 		'space',

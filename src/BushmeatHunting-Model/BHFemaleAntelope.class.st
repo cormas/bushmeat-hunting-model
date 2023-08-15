@@ -1,6 +1,6 @@
 Class {
-	#name : #BHFemaleAnthelope,
-	#superclass : #BHAnthelope,
+	#name : #BHFemaleAntelope,
+	#superclass : #BHAntelope,
 	#instVars : [
 		'gestationLength',
 		'newBorns'
@@ -9,30 +9,30 @@ Class {
 }
 
 { #category : #converting }
-BHFemaleAnthelope class >> asGetterForEntityClass [
+BHFemaleAntelope class >> asGetterForEntityClass [
 
-	^ #femaleAnthelopes
+	^ #femaleAntelopes
 ]
 
 { #category : #accessing }
-BHFemaleAnthelope class >> minAgeLimit [
+BHFemaleAntelope class >> minAgeLimit [
 
 	^ 72
 ]
 
 { #category : #'population dynamics' }
-BHFemaleAnthelope >> addNewborn [
+BHFemaleAntelope >> addNewborn [
 
-	| newAnthelope |			
+	| newAntelope |			
 
-	newAnthelope := self class new init0.
-	newAnthelope patch: patch.
-	self newBorns add: newAnthelope
+	newAntelope := self class new init0.
+	newAntelope patch: patch.
+	self newBorns add: newAntelope
 
 ]
 
 { #category : #accessing }
-BHFemaleAnthelope >> detailsOfPOV [
+BHFemaleAntelope >> detailsOfPOV [
 
 	^ String << [ : stream | 
 		stream 
@@ -41,14 +41,14 @@ BHFemaleAnthelope >> detailsOfPOV [
 ]
 
 { #category : #'population dynamics' }
-BHFemaleAnthelope >> findPartner [
+BHFemaleAntelope >> findPartner [
 	" do nothing "
 	
 	^ nil
 ]
 
 { #category : #accessing }
-BHFemaleAnthelope >> gestationLength [
+BHFemaleAntelope >> gestationLength [
 
 	^ gestationLength
 		  ifNil: [ gestationLength := 0 ]
@@ -56,40 +56,40 @@ BHFemaleAnthelope >> gestationLength [
 ]
 
 { #category : #accessing }
-BHFemaleAnthelope >> gestationLength: arg1 [
+BHFemaleAntelope >> gestationLength: arg1 [
 
 	gestationLength := arg1
 ]
 
 { #category : #'initialize - release' }
-BHFemaleAnthelope >> init0 [
+BHFemaleAntelope >> init0 [
 
 	super init0.
 	gestationLength := 0
 ]
 
 { #category : #testing }
-BHFemaleAnthelope >> isFemale [ 
+BHFemaleAntelope >> isFemale [ 
 
 	^ true
 ]
 
 { #category : #accessing }
-BHFemaleAnthelope >> isPatchingWithAdultMale [
+BHFemaleAntelope >> isPatchingWithAdultMale [
 
-	^ ((patch occupantsType: BHMaleAnthelope) anySatisfy: [ :arg1 | 
+	^ ((patch occupantsType: BHMaleAntelope) anySatisfy: [ :arg1 | 
 		   arg1 age < 21 ]) not
 ]
 
 { #category : #accessing }
-BHFemaleAnthelope >> newBorns [
+BHFemaleAntelope >> newBorns [
 
 	^ newBorns
 		ifNil: [ newBorns := OrderedCollection new ]
 ]
 
 { #category : #printing }
-BHFemaleAnthelope >> offspringDetails [
+BHFemaleAntelope >> offspringDetails [
 	" Answer a <String> with offspring details of the receiver "
 	
 	^ String << [ : stream | 
@@ -106,19 +106,19 @@ BHFemaleAnthelope >> offspringDetails [
 ]
 
 { #category : #pov }
-BHFemaleAnthelope >> povColor [
+BHFemaleAntelope >> povColor [
 
 	^ Color pink
 ]
 
 { #category : #accessing }
-BHFemaleAnthelope >> pregnancyTime [
+BHFemaleAntelope >> pregnancyTime [
 
 	^ 30
 ]
 
 { #category : #printing }
-BHFemaleAnthelope >> printOn: aStream [
+BHFemaleAntelope >> printOn: aStream [
 	" Private - See superimplementor's comment "
 
 	super printOn: aStream.
@@ -126,13 +126,13 @@ BHFemaleAnthelope >> printOn: aStream [
 ]
 
 { #category : #printing }
-BHFemaleAnthelope >> sexString [
+BHFemaleAntelope >> sexString [
 
 	^ 'Female'
 ]
 
 { #category : #'population dynamics' }
-BHFemaleAnthelope >> updateBehavior [
+BHFemaleAntelope >> updateBehavior [
 
 	super updateBehavior.
 	self isDead not
@@ -140,7 +140,7 @@ BHFemaleAnthelope >> updateBehavior [
 ]
 
 { #category : #'population dynamics' }
-BHFemaleAnthelope >> updateGestationBehavior [
+BHFemaleAntelope >> updateGestationBehavior [
 
 	self gestationLength > 0 ifTrue: [ 
 		gestationLength := gestationLength + 1 ].

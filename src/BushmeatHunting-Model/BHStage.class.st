@@ -2,7 +2,7 @@ Class {
 	#name : #BHStage,
 	#superclass : #Object,
 	#instVars : [
-		'anthelope'
+		'antelope'
 	],
 	#category : #'BushmeatHunting-Model'
 }
@@ -26,10 +26,10 @@ BHStage class >> minAgeLimit [
 ]
 
 { #category : #'instance creation' }
-BHStage class >> newFor: anAnthelope [
+BHStage class >> newFor: anAntelope [
 
 	^ self new
-		initializeWith: anAnthelope;
+		initializeWith: anAntelope;
 		yourself
 ]
 
@@ -44,27 +44,27 @@ BHStage class >> stageFor: arg1 [
 ]
 
 { #category : #'instance creation' }
-BHStage class >> updateStageFrom: anAnthelope [
-	" Answer a new receiver's instance for anAnthelope "
+BHStage class >> updateStageFrom: anAntelope [
+	" Answer a new receiver's instance for anAntelope "
 	
 	(self subclasses 
-		detect: [ : stageSubclass | stageSubclass stageFor: anAnthelope ]
-		ifFound: [ : stageSubclass | 
-			^ anAnthelope stage class = stageSubclass
-				ifTrue: [ anAnthelope stage ]
-				ifFalse: [ stageSubclass newFor: anAnthelope ] ]) 
+		detect: [ :stageSubclass | stageSubclass stageFor: anAntelope ]
+		ifFound: [ :stageSubclass | 
+			^ anAntelope stage class = stageSubclass
+				ifTrue: [ anAntelope stage ]
+				ifFalse: [ stageSubclass newFor: anAntelope ] ]) 
 ]
 
 { #category : #accessing }
-BHStage >> anthelope [
+BHStage >> antelope [
 
-	^ anthelope
+	^ antelope
 ]
 
 { #category : #accessing }
-BHStage >> anthelope: arg1 [
+BHStage >> antelope: arg1 [
 
-	anthelope := arg1
+	antelope := arg1
 ]
 
 { #category : #testing }
@@ -80,9 +80,9 @@ BHStage >> friendlyName [
 ]
 
 { #category : #initialization }
-BHStage >> initializeWith: anAnthelope [
+BHStage >> initializeWith: anAntelope [
 
-	self anthelope: anAnthelope
+	self antelope: anAntelope
 ]
 
 { #category : #testing }
@@ -122,5 +122,5 @@ BHStage >> sizeOfPOV [
 BHStage >> updateLivingStatus [
 
 	self isProbablyDying 
-		ifTrue: [ self anthelope delete ]
+		ifTrue: [ self antelope delete ]
 ]

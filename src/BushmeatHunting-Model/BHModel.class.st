@@ -24,22 +24,22 @@ Class {
 	#name : #BHModel,
 	#superclass : #CMAbstractModel,
 	#instVars : [
-		'anthelopes',
 		'cells',
 		'huntingFamilies',
 		'catchesNumber',
-		'isHuntingSeason'
+		'isHuntingSeason',
+		'antelopes'
 	],
 	#category : #'BushmeatHunting-Model'
 }
 
 { #category : #'- probes' }
-BHModel class >> colorOfProbe_anthelopesSize [
+BHModel class >> colorOfProbe_antelopesSize [
   ^ (Color r: 0.6422287390029325 g: 0.3870967741935484 b: 0.14565004887585534 alpha: 1.0)
 ]
 
 { #category : #accessing }
-BHModel class >> maximumAllowedAnthelopePerFamily [
+BHModel class >> maximumAllowedAntelopePerFamily [
 
 	^ 30
 ]
@@ -75,24 +75,24 @@ BHModel >> addHuntingFamily: famId [
 ]
 
 { #category : #accessing }
-BHModel >> anthelopes [
+BHModel >> antelopes [
 
-	^ anthelopes
-		  ifNil: [ anthelopes := OrderedCollection new ]
-		  ifNotNil: [ anthelopes ]
+	^ antelopes
+		  ifNil: [ antelopes := OrderedCollection new ]
+		  ifNotNil: [ antelopes ]
 ]
 
 { #category : #accessing }
-BHModel >> anthelopes: arg1 [
+BHModel >> antelopes: arg1 [
 
-	anthelopes := arg1
+	antelopes := arg1
 ]
 
 { #category : #probes }
-BHModel >> anthelopesSize [
+BHModel >> antelopesSize [
 	<probe>
 
-	^ (self allTheEntities: BHAnthelope) size
+	^ (self allTheEntities: BHAntelope) size
 ]
 
 { #category : #accessing }
@@ -120,10 +120,10 @@ BHModel >> cells: arg1 [
 ]
 
 { #category : #accessing }
-BHModel >> femaleAnthelopes [
-	" Answer a <Collection> of the receiver's female anthelopes "
+BHModel >> femaleAntelopes [
+	" Answer a <Collection> of the receiver's female antelopes "
 	
-	^ self anthelopes select: #isFemale
+	^ self antelopes select: #isFemale
 ]
 
 { #category : #accessing }
@@ -147,18 +147,18 @@ BHModel >> increaseCatchesNumber [
 ]
 
 { #category : #'initialize-release' }
-BHModel >> initAnthelopes: anthNumber [
-	" Private - Create anthNumber randomly located anthelopes, with a random sex ratio "
+BHModel >> initAntelopes: anthNumber [
+	" Private - Create anthNumber randomly located antelopes, with a random sex ratio "
 
-	self anthelopes: (self createN: anthNumber randomlyLocatedEntitiesFrom: BHAnthelope subclasses)
+	self antelopes: (self createN: anthNumber randomlyLocatedEntitiesFrom: BHAntelope subclasses)
 ]
 
 { #category : #'initialize-release' }
-BHModel >> initAnthelopes: anthNumber sexRatio: anAssociation [
-	" Private - Create anthNumber randomly located anthelopes, with a random sex ratio "
+BHModel >> initAntelopes: anthNumber sexRatio: anAssociation [
+	" Private - Create anthNumber randomly located antelopes, with a random sex ratio "
 
 	self shouldBeImplemented.
-	self anthelopes: (self createN: anthNumber randomlyLocatedEntitiesFrom: BHAnthelope subclasses)
+	self antelopes: (self createN: anthNumber randomlyLocatedEntitiesFrom: BHAntelope subclasses)
 ]
 
 { #category : #'initialize-release' }
@@ -176,35 +176,35 @@ BHModel >> initScenarioWholeSeason [
 	self isHuntingSeason: false.
 	self
 		initSpace;
-		initAnthelopes: 15;
+		initAntelopes: 15;
 		initFamilies.
 	self 
-		displayPov: #pov of: BHMaleAnthelope;
-		displayPov: #pov of: BHFemaleAnthelope;
+		displayPov: #pov of: BHMaleAntelope;
+		displayPov: #pov of: BHFemaleAntelope;
 		displayPov: #pov of: BHCell
 ]
 
 { #category : #init }
-BHModel >> initScenarioWith100Anthelopes [
+BHModel >> initScenarioWith100Antelopes [
 
 	self
 		initSpace;
-		initAnthelopes: 100;
-		displayPov: #pov of: BHMaleAnthelope;
-		displayPov: #pov of: BHFemaleAnthelope
+		initAntelopes: 100;
+		displayPov: #pov of: BHMaleAntelope;
+		displayPov: #pov of: BHFemaleAntelope
 ]
 
 { #category : #init }
-BHModel >> initScenarioWith60Anthelopes [
+BHModel >> initScenarioWith60Antelopes [
 
 	catchesNumber := 0.
 	self
 		isHuntingSeason: false;
 		initSpace;
-		initAnthelopes: 120;
+		initAntelopes: 120;
 		initFamilies;
-		displayPov: #pov of: BHMaleAnthelope;
-		displayPov: #pov of: BHFemaleAnthelope;
+		displayPov: #pov of: BHMaleAntelope;
+		displayPov: #pov of: BHFemaleAntelope;
 		displayPov: #pov of: BHCell
 ]
 
@@ -254,10 +254,10 @@ BHModel >> isHuntingSeason: anObject [
 ]
 
 { #category : #accessing }
-BHModel >> maleAnthelopes [
-	" Answer a <Collection> of the receiver's female anthelopes "
+BHModel >> maleAntelopes [
+	" Answer a <Collection> of the receiver's female antelopes "
 	
-	^ self anthelopes reject: #isFemale
+	^ self antelopes reject: #isFemale
 ]
 
 { #category : #private }
@@ -273,9 +273,9 @@ BHModel >> noAgent [
 ]
 
 { #category : #accessing }
-BHModel >> removeAnthelope: anAnthelope [
+BHModel >> removeAntelope: anAntelope [
 
-	self anthelopes remove: anAnthelope
+	self antelopes remove: anAntelope
 ]
 
 { #category : #control }
@@ -283,14 +283,13 @@ BHModel >> step [
 
 	self isChangingSeason
 		ifTrue: [ self initTraps ]
-		ifFalse: [ self stepAnthelopes ]
+		ifFalse: [ self stepAntelopes ]
 ]
 
 { #category : #control }
-BHModel >> stepAnthelopes [
+BHModel >> stepAntelopes [
 
-	self stepEntities: BHAnthelope.
-	"self updateAllEntities: CMBushmeatAnthelope."
+	self stepEntities: BHAntelope.
 ]
 
 { #category : #accessing }

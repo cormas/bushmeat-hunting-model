@@ -1,5 +1,5 @@
 Class {
-	#name : #BHAnthelope,
+	#name : #BHAntelope,
 	#superclass : #CMAgent,
 	#traits : 'TCMLocated @ {#basicMoveTo:->#moveTo:}',
 	#classTraits : 'TCMLocated classTrait',
@@ -12,31 +12,31 @@ Class {
 }
 
 { #category : #converting }
-BHAnthelope class >> asGetterForEntityClass [
+BHAntelope class >> asGetterForEntityClass [
 
 	self subclassResponsibility 
 ]
 
 { #category : #accessing }
-BHAnthelope class >> maxAgeLimit [
+BHAntelope class >> maxAgeLimit [
 
 	^ SmallInteger maxVal
 ]
 
 { #category : #accessing }
-BHAnthelope >> age [
+BHAntelope >> age [
 
 	^ age
 ]
 
 { #category : #accessing }
-BHAnthelope >> age: arg1 [
+BHAntelope >> age: arg1 [
 
 	age := arg1
 ]
 
 { #category : #testing }
-BHAnthelope >> customShapeSelector [
+BHAntelope >> customShapeSelector [
 
 	^ #ellipse "self hasPartner
 		  ifTrue: [ 
@@ -46,15 +46,15 @@ BHAnthelope >> customShapeSelector [
 ]
 
 { #category : #moving }
-BHAnthelope >> delete [
+BHAntelope >> delete [
 
-	self cormasModel removeAnthelope: self.
+	self cormasModel removeAntelope: self.
 	super delete.
 
 ]
 
 { #category : #accessing }
-BHAnthelope >> detailsOfPOV [
+BHAntelope >> detailsOfPOV [
 	" Answer a <String> to visually distinguish the receiver in a space "
 
 	^ String << [ : stream |
@@ -70,73 +70,64 @@ BHAnthelope >> detailsOfPOV [
 ]
 
 { #category : #'population dynamics' }
-BHAnthelope >> findPartner [
+BHAntelope >> findPartner [
 
 	self subclassResponsibility
 ]
 
 { #category : #testing }
-BHAnthelope >> hasCustomShape [
+BHAntelope >> hasCustomShape [
 
 	^ self hasPartner
 ]
 
 { #category : #testing }
-BHAnthelope >> hasNoPartner [
+BHAntelope >> hasNoPartner [
 
 	^ partner isNil
 ]
 
 { #category : #testing }
-BHAnthelope >> hasPartner [
+BHAntelope >> hasPartner [
 
 	^ partner notNil
 ]
 
 { #category : #'initialize-release' }
-BHAnthelope >> init [
+BHAntelope >> init [
 
 	self
-		dead: false;
 		age: (0 to: 200) atRandom;
 		stage: (BHStage updateStageFrom: self)
 ]
 
 { #category : #'initialize-release' }
-BHAnthelope >> init0 [
+BHAntelope >> init0 [
 
 	super init.
-	self
-		dead: false;
-		age: 0
+	self age: 0
 ]
 
 { #category : #testing }
-BHAnthelope >> isAdult [
+BHAntelope >> isAdult [
 
 	^ self stage isAdult
 ]
 
 { #category : #testing }
-BHAnthelope >> isAlive [
-
-	^ self isDead not
-]
-
-{ #category : #testing }
-BHAnthelope >> isFemale [ 
+BHAntelope >> isFemale [ 
 
 	^ false
 ]
 
 { #category : #testing }
-BHAnthelope >> isNewborn [
+BHAntelope >> isNewborn [
 
 	^ self stage isNewborn
 ]
 
 { #category : #accessing }
-BHAnthelope >> labelOfPOV [
+BHAntelope >> labelOfPOV [
 	" Answer a <String> to visually distinguish the receiver in a space "
 
 	^ String << [ : stream |
@@ -147,30 +138,30 @@ BHAnthelope >> labelOfPOV [
 ]
 
 { #category : #accessing }
-BHAnthelope >> maxAgeLimit [
+BHAntelope >> maxAgeLimit [
 
 	^ self class maxAgeLimit
 ]
 
 { #category : #accessing }
-BHAnthelope >> minAgeLimit [
+BHAntelope >> minAgeLimit [
 
 	^ self class minAgeLimit
 ]
 
 { #category : #'population dynamics' }
-BHAnthelope >> move [
+BHAntelope >> move [
 
 	self findPartner
 		ifNil: [ self moveToEmptyPlace ]
-		ifNotNil: [ : candidateAnthelope |
-			partner := candidateAnthelope.
-			self moveTo: candidateAnthelope patch.
+		ifNotNil: [ :candidateAntelope |
+			partner := candidateAntelope.
+			self moveTo: candidateAntelope patch.
 			partner partner: self ]
 ]
 
 { #category : #moving }
-BHAnthelope >> moveTo: nearestEmptyLoc [
+BHAntelope >> moveTo: nearestEmptyLoc [
 
 	self basicMoveTo: nearestEmptyLoc.
 	nearestEmptyLoc hasTrap ifFalse: [ ^ self ].
@@ -180,7 +171,7 @@ BHAnthelope >> moveTo: nearestEmptyLoc [
 ]
 
 { #category : #'population dynamics' }
-BHAnthelope >> moveToEmptyPlace [
+BHAntelope >> moveToEmptyPlace [
 
 	 self nearestEmptyLocation
 		ifNil: [ ('No empty location for: ' , self id asString) traceCr ]
@@ -188,19 +179,19 @@ BHAnthelope >> moveToEmptyPlace [
 ]
 
 { #category : #accessing }
-BHAnthelope >> partner [
+BHAntelope >> partner [
 
 	^ partner
 ]
 
 { #category : #accessing }
-BHAnthelope >> partner: arg1 [
+BHAntelope >> partner: arg1 [
 
 	partner := arg1
 ]
 
 { #category : #pov }
-BHAnthelope >> pov [
+BHAntelope >> pov [
 
 	^ self isDead
 		  ifTrue: [ Color black ]
@@ -214,7 +205,7 @@ BHAnthelope >> pov [
 ]
 
 { #category : #printing }
-BHAnthelope >> printOn: aStream [
+BHAntelope >> printOn: aStream [
 
 	aStream
 		<< 'Id: ';
@@ -228,32 +219,32 @@ BHAnthelope >> printOn: aStream [
 ]
 
 { #category : #printing }
-BHAnthelope >> sexString [
+BHAntelope >> sexString [
 
 	self subclassResponsibility
 ]
 
 { #category : #accessing }
-BHAnthelope >> sizeOfPOV [
+BHAntelope >> sizeOfPOV [
 	" Answer a <Number> to visually distinguish the receiver in a space "
 
 	^ self stage sizeOfPOV
 ]
 
 { #category : #accessing }
-BHAnthelope >> stage [
+BHAntelope >> stage [
 
 	^ stage
 ]
 
 { #category : #accessing }
-BHAnthelope >> stage: aCMBushmeatStage [
+BHAntelope >> stage: aCMBushmeatStage [
 
 	stage := aCMBushmeatStage
 ]
 
 { #category : #control }
-BHAnthelope >> step [
+BHAntelope >> step [
 
 	self
 		age: self age + 1;
@@ -263,22 +254,23 @@ BHAnthelope >> step [
 ]
 
 { #category : #'population dynamics' }
-BHAnthelope >> updateBehavior [
+BHAntelope >> updateBehavior [
 
 	(self isDead not and: [ self isAdult and: [ self hasPartner not ] ])
 		ifTrue: [ self move ]
 ]
 
 { #category : #'population dynamics' }
-BHAnthelope >> updateLivingStatus [
+BHAntelope >> updateLivingStatus [
 	" Update the receiver's dead or alive status using a random probability according to its stage "
 	
-	self stage updateLivingStatus
+	self stage isProbablyDying 
+		ifTrue: [ self delete ]
 	
 ]
 
 { #category : #'population dynamics' }
-BHAnthelope >> updateStage [
+BHAntelope >> updateStage [
 	" Update the receiver's stage "
 	
 	self stage: (BHStage updateStageFrom: self)
